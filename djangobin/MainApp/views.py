@@ -12,8 +12,8 @@ def login(request):
 
 def login_form(request):
     if request.method == 'POST':
-        username = request.POST.get("loginemail")
-        loginpassword = request.POST.get("loginpassword")
+        username = request.POST.get("email")
+        loginpassword = request.POST.get("password")
         # print(username)
         # print(loginpassword)
         # messages.success(request, "printed post data sussesfully\n" + username +"\n" + request.POST.get("loginpassword") )
@@ -22,14 +22,14 @@ def login_form(request):
             if user.is_active:
                 auth_login(request, user)
                 messages.success(request, "You have been securely logged in")
-                return redirect("mainSiteApp:console")
+                return redirect("MainApp:home")
             else:
                 messages.success(request, "The password is valid, but the account has been disabled!"
                                           " Please contact us, mail : bosch@makervillage.in")
-                return redirect("mainSiteApp:LoginPage")
+                return redirect("MainApp:login")
         else:
             messages.success(request, "The username and password were incorrect,or you may not activated.check your mail for activation link ")
-            return redirect("mainSiteApp:LoginPage")
+            return redirect("MainApp:login")
 
     return redirect("mainSiteApp:LoginPage")
 
