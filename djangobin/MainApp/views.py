@@ -7,9 +7,9 @@ def home(request):
     return render(request,'home.html',{})
 
 def login(request):
-    if request.method == "POST":
+ #   if request.method == "POST":
         #process request object
-    else:
+#    else:
         #redirect to loginpage with warning
     username = request.POST['username']
     password = request.POST['password']

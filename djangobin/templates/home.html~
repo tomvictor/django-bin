@@ -8,8 +8,6 @@ Home Page
 
 <h1>
 Welcome to django Bin
-</br>
-{{ user }}
 </h1>
 
 </body>
