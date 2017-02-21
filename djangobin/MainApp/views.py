@@ -1,5 +1,5 @@
-from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate, login as auth_login
+from django.shortcuts import render,redirect,HttpResponseRedirect
+from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 # Create your views here.
@@ -34,10 +34,12 @@ def login_form(request):
     return redirect("mainSiteApp:LoginPage")
 
 
+
 @login_required
-def logout(request):
+def logout_view(request):
     logout(request)
-    return redirect('/login/')
+    messages.success(request, "You have been logged out Succesfully")
+    return HttpResponseRedirect('/login/')
 
 
 def single_post(request):
