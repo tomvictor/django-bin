@@ -2,10 +2,15 @@ from django.shortcuts import render,redirect,HttpResponseRedirect
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+#forms
+from .form import NewPaste
 # Create your views here.
 
 def home(request):
-    return render(request,'home.html',{})
+    context_pass = {
+        'form':NewPaste
+    }
+    return render(request,'home.html',context_pass)
 
 def login(request):
     return render(request,'login.html',{})
@@ -47,3 +52,6 @@ def single_post(request):
 
 def single_user(request):
     return render(request,'single-user.html',{})
+
+def all_pastes(request):
+    return render(request,'all-posts.html',{})

@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^single/$',views.single_post,name='single-post'),
     url(r'^user/$',views.single_user,name='single-user'),
     url(r'^loginform/$',views.login_form,name='login-form-handler'),
+    url(r'^all/$',views.all_pastes,name='view-all'),
 ]
