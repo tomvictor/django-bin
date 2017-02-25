@@ -1,17 +1,57 @@
 {% extends 'base.html' %}
 {% load  staticfiles %}
- {% block extrahead %}
-      <!-- Custom CSS -->
-    <link href="{% static 'css/blog-post.css' %}" rel="stylesheet">
+{% load crispy_forms_tags %}
+
+   {% block extrahead %}
+
+          <!-- Custom styles for this template -->
+       <link href="{% static 'css/jumbotron.css' %}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+
     {% endblock %}
 
- {% block content %}
+
+{% block content %}
+
+<div class="container">
 
 
-            <div class="row">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Export</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">Nav item</a></li>
+                <li><a href="">Nav item again</a></li>
+                <li><a href="">One more nav</a></li>
+                <li><a href="">Another nav item</a></li>
+                <li><a href="">More navigation</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">Nav item again</a></li>
+                <li><a href="">One more nav</a></li>
+                <li><a href="">Another nav item</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-            <!-- Blog Post Content Column -->
-            <div class="col-lg-8">
+
+
+              {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-info alert-dismissible" id="faded" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <strong>{{ message }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                     <!-- Blog Post Content Column -->
 
                 <!-- Blog Post -->
 
@@ -100,70 +140,36 @@
                     </div>
                 </div>
 
-            </div>
 
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
+                <hr>
 
-                <!-- Blog Search Well -->
-                <div class="well">
-                    <h4>Blog Search</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                    </div>
-                    <!-- /.input-group -->
-                </div>
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="previous">
+                        <a href="#">&larr; Older</a>
+                    </li>
+                    <li class="next">
+                        <a href="#">Newer &rarr;</a>
+                    </li>
+                </ul>
 
-                <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Blog Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
 
-                <!-- Side Widget Well -->
-                <div class="well">
-                    <h4>Side Widget Well</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-                </div>
 
-            </div>
+
+
+            <hr>
+            <footer>
+                <p>&copy; 2016 Technorip, Inc.</p>
+            </footer>
 
         </div>
-        <!-- /.row -->
+    </div>
 
 
- {% endblock %}
+</div>
 
- {% block extrafooter %}
-    {% endblock %}
+
+{% endblock %}
+
+
+
