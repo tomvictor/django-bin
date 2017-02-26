@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import Textarea
+from django.forms.widgets import Textarea,RadioSelect
 from MainApp.models import Post
 
 
@@ -11,6 +11,26 @@ class NewPost(forms.ModelForm):
             "content",
             "status"
         ]
+        labels = {
+            'title': 'Title',
+            'content': 'Content'
+        }
+
+        help_texts = {
+            'status' : 'Please login for Private posts'
+        }
+
+        error_messages = {
+            'title': {
+                'max_length': "This writer's name is too long.",
+            },
+        }
+
+        VISIBILITY_CHOICES = (
+            ('public', 'public'),
+            ('private', 'private'),
+        )
         widgets = {
-            'content': Textarea(attrs={'cols': 80, 'rows': 15}),
+            'content': Textarea(attrs={'cols': 80, 'rows': 13}),
+            'status' : RadioSelect
         }
