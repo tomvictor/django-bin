@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.views.generic import ListView
 from django.views.generic import DetailView
+from django.shortcuts import get_object_or_404
 #forms
 from .form import NewPost, LoginForm, SignUpForm
 # Modals
@@ -24,7 +25,7 @@ class all_posts(ListView):
     context_object_name = 'all_posts'
 
 class home(ListView):
-    model = Post
+    queryset = Post.objects.all().order_by("-timestamp")
     template_name = 'home.html'
     context_object_name = 'all_posts'
 
@@ -33,7 +34,7 @@ class home(ListView):
         context = super(home, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['form'] = NewPost
-        context['latest_posts'] = super(home,self).get_queryset()[:5]
+        context['latest_posts'] = super(home,self).get_queryset().order_by("-timestamp")[:5]
         return context
 
 
