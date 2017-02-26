@@ -33,6 +33,7 @@ class home(ListView):
         context = super(home, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['form'] = NewPost
+        context['latest_posts'] = super(home,self).get_queryset()[:5]
         return context
 
 
