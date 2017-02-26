@@ -25,7 +25,8 @@ def sign_up_view(request):
     return render(request,'login.html',context_pass)
 
 
-def login_form(request):
+
+def login(request):
     if request.method == 'POST':
         username = request.POST.get("email")
         loginpassword = request.POST.get("password")
@@ -47,6 +48,8 @@ def login_form(request):
             return redirect("MainApp:login")
 
     return redirect("mainSiteApp:LoginPage")
+
+
 
 
 
