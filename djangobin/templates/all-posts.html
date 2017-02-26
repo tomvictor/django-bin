@@ -1,87 +1,70 @@
 {% extends 'base.html' %}
 {% load  staticfiles %}
 
- {% block extrahead %}
-      <!-- Custom CSS -->
+{% block extrahead %}
+    <!-- Custom CSS -->
     <link href="{% static 'css/blog-home.css' %}" rel="stylesheet">
 
-    {% endblock %}
+{% endblock %}
 
 
- {% block content %}
+{% block content %}
 
 
-<div class="container">
+    <div class="container">
 
 
-    <div class="row">
+        <div class="row">
 
-  <!-- Blog Entries Column -->
+            <!-- Blog Entries Column -->
             <div class="col-md-8">
 
                 {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-info alert-dismissible" id="faded" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                                <strong>{{ message }}</strong>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
+                    {% for message in messages %}
+                        <div class="alert alert-info alert-dismissible" id="faded" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <strong>{{ message }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
 
                 <h1 class="page-header">
-                    Django Bin
-                    <small>Latest Activities</small>
+                    Paste Way
+                    <small>Latest Posts</small>
                 </h1>
 
+                {% for post in object_list %}
 
-                <!-- First Blog Post -->
-                <h2>
-                    <a href="#">Blog Post Title</a>
-                </h2>
-                <p class="lead">
-                    by <a href="index.php">Start Bootstrap</a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:00 PM</p>
-                <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.</p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <!-- First Blog Post -->
+                    <h2>
+                        <a href="#">Blog Post Title</a>
+                    </h2>
+                    <p class="lead">
+                        by <a href="#">{{ post.title }}</a>
+                    </p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.timestamp }}</p>
+                    <hr>
+                    {% if post.image %}
+                        <img class="img-responsive" src="{{ post.image.url }}" alt="">
+                        <hr>
+                    {% endif %}
 
-                <hr>
 
-                <!-- Second Blog Post -->
-                <h2>
-                    <a href="#">Blog Post Title</a>
-                </h2>
-                <p class="lead">
-                    by <a href="index.php">Start Bootstrap</a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:45 PM</p>
-                <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, quasi, fugiat, asperiores harum voluptatum tenetur a possimus nesciunt quod accusamus saepe tempora ipsam distinctio minima dolorum perferendis labore impedit voluptates!</p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <p>
+                        {{ post.content }}
+                    </p>
+                    <a class="btn btn-primary" href="#">Read More <span
+                            class="glyphicon glyphicon-chevron-right"></span></a>
 
-                <hr>
+                    <hr>
 
-                <!-- Third Blog Post -->
-                <h2>
-                    <a href="#">Blog Post Title</a>
-                </h2>
-                <p class="lead">
-                    by <a href="index.php">Start Bootstrap</a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:45 PM</p>
-                <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, voluptates, voluptas dolore ipsam cumque quam veniam accusantium laudantium adipisci architecto itaque dicta aperiam maiores provident id incidunt autem. Magni, ratione.</p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                {% endfor %}
 
-                <hr>
+
+
+
+
 
                 <!-- Pager -->
                 <ul class="pager">
@@ -149,20 +132,21 @@
                 <!-- Side Widget Well -->
                 <div class="well">
                     <h4>Side Widget Well</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci
+                        accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
                 </div>
 
             </div>
 
 
+        </div>
+
+
     </div>
 
 
-</div>
+{% endblock %}
 
 
- {% endblock %}
-
-
- {% block extrafooter %}
-    {% endblock %}
+{% block extrafooter %}
+{% endblock %}

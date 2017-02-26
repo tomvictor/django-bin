@@ -30,7 +30,7 @@ class NewPost(forms.ModelForm):
 
 
         widgets = {
-            'content': Textarea(attrs={'cols': 80, 'rows': 13}),
+            'content': Textarea(attrs={'cols': 80, 'rows': 10}),
             'status' : RadioSelect
         }
 
