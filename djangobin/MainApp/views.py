@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,HttpResponseRedirect
+from django.shortcuts import render,redirect,HttpResponseRedirect,get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -34,10 +34,15 @@ class home(ListView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super(home, self).get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        # current_user = self.request.user
-        # print(current_user)
-        context['form'] = NewPost()
+        #Add in a QuerySet of all the books
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            context_user = current_user
+        else:
+            context_user = get_object_or_404(Post,id=1)
+
+        print(current_user)
+        context['form'] = NewPost(initial={'writer': context_user})
         context['latest_posts'] = super(home,self).get_queryset().order_by("-timestamp")[:5]
         return context
 
@@ -114,7 +119,7 @@ def post_form_upload(request):
             form.save()
             return redirect("MainApp:home")
     else:
-        messages.success(request, " form not saved due to error")
+        messages.success(request, "form not saved due to error")
     return redirect("MainApp:home")
 
 
