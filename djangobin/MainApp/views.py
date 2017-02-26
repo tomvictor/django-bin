@@ -25,10 +25,9 @@ def sign_up_view(request):
     return render(request,'login.html',context_pass)
 
 
-
-def login(request):
+def login_form(request):
     if request.method == 'POST':
-        username = request.POST.get("email")
+        username = request.POST.get("username")
         loginpassword = request.POST.get("password")
         # print(username)
         # print(loginpassword)
@@ -41,15 +40,13 @@ def login(request):
                 return redirect("MainApp:home")
             else:
                 messages.success(request, "The password is valid, but the account has been disabled!"
-                                          " Please contact us, mail : bosch@makervillage.in")
+                                          " Please contact us, mail : tom@technorip.com")
                 return redirect("MainApp:login")
         else:
             messages.success(request, "The username and password were incorrect,or you may not activated.check your mail for activation link ")
             return redirect("MainApp:login")
 
     return redirect("mainSiteApp:LoginPage")
-
-
 
 
 

@@ -11,5 +11,4 @@ urlpatterns = [
     url(r'^all/$',views.all_pastes,name='view-all'),
     url(r'^formhandle/$',views.all_pastes,name='view-all'),
     url(r'^signup/$',views.sign_up_view,name='sign-up'),
-    url(r'^newlogin/$',views.sign_up_view,name='sign-up'),
 ]
