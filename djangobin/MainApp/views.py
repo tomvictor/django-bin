@@ -27,7 +27,7 @@ class all_posts(ListView):
     context_object_name = 'all_posts'
 
 class home(ListView):
-    queryset = Post.objects.all().order_by("timestamp")
+    queryset = Post.objects.all().order_by("-timestamp")
     template_name = 'home.html'
     context_object_name = 'all_posts'
 
@@ -43,7 +43,7 @@ class home(ListView):
 
         print(current_user)
         context['form'] = NewPost(initial={'writer': context_user})
-        context['latest_posts'] = super(home,self).get_queryset().order_by("-timestamp")[:5]
+        context['latest_posts'] = super(home,self).get_queryset().order_by("timestamp")[5:]
         return context
 
 
