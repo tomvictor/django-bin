@@ -22,7 +22,7 @@ class NewPost(forms.ModelForm):
 
         error_messages = {
             'title': {
-                'max_length': "This writer's name is too long.",
+                'max_length': "This title is too long.",
             },
         }
 
