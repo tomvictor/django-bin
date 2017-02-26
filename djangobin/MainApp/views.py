@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect,HttpResponseRedirect
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib import messages
 #forms
 from .form import NewPost, LoginForm, SignUpForm
@@ -14,15 +15,30 @@ def home(request):
 
 def login(request):
     context_pass = {
-        'form': LoginForm
+        'form': LoginForm,
+        'page_title': "Please Sign In",
+        'pageurl':"login"
     }
     return render(request,'login.html',context_pass)
 
 def sign_up_view(request):
     context_pass = {
-        'form': SignUpForm
+        'form': SignUpForm,
+        'page_title': "Register Now",
+        'pageurl': "signup"
     }
     return render(request,'login.html',context_pass)
+
+def signup_form(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            firstname = form.cleaned_data.get("firstname")
+            lastname = form.cleaned_data.get("lastname")
+            user = User.objects.create_user(username, username, password)
+    return redirect("mainSiteApp:LoginPage")
 
 
 def login_form(request):

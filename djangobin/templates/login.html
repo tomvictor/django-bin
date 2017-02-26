@@ -1,55 +1,60 @@
 {% extends 'base.html' %}
 {% load  staticfiles %}
 {% load crispy_forms_tags %}
- {% block extrahead %}
-      <!-- Custom CSS -->
- <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
-    {% endblock %}
+{% block extrahead %}
+    <!-- Custom CSS -->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+{% endblock %}
 
- {% block content %}
-
-
-          <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <br>
-                <br>
-                <br>
+{% block content %}
 
 
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Please Sign In</h3>
-                    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <br>
+            <br>
+            <br>
 
 
-                     {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-info alert-dismissible" id="faded" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                                <strong>{{ message }}</strong>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                    <div class="panel-body">
-                        <form role="form" action="/loginform/" method="post">
-                            {% csrf_token %}
-                            <fieldset>
-
-                                {{ form|crispy }}
-
-                                <!-- Change this to a button or input when using this as a form -->
-                                <button class="btn btn-lg btn-success btn-block" type="submit">Login</button>
-                            </fieldset>
-                        </form>
-                    </div>
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ page_title }}</h3>
                 </div>
 
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-info alert-dismissible" id="faded" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <strong>{{ message }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="panel-body">
+                    {% if pageurl == "login" %}
+                        <form role="form" action="/loginform/" method="post">
+                    {% elif pageurl == "signup" %}
+                        <form role="form" action="/signupform/" method="post">
+                    {% endif %}
+
+                    {% csrf_token %}
+                    <fieldset>
+
+                        {{ form|crispy }}
+
+                        <!-- Change this to a button or input when using this as a form -->
+                        <button class="btn btn-lg btn-success btn-block" type="submit">Login</button>
+                    </fieldset>
+                    </form>
+                </div>
             </div>
+
         </div>
+    </div>
 
 
- {% endblock %}
+{% endblock %}
 
- {% block extrafooter %}
-    {% endblock %}
+{% block extrafooter %}
+{% endblock %}

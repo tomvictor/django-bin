@@ -37,8 +37,9 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
     remember = forms.BooleanField(label="Remember Me",required=False )
 
+
 class SignUpForm(forms.Form):
     firstname = forms.CharField(max_length=100)
     lastname = forms.CharField(max_length=100)
     username = forms.EmailField(max_length=100)
-    password = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
