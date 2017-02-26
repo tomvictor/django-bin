@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect,HttpResponseRedirect
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user
 from django.contrib import messages
+from django.http import HttpResponse
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.shortcuts import get_object_or_404
@@ -33,7 +35,9 @@ class home(ListView):
         # Call the base implementation first to get a context
         context = super(home, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['form'] = NewPost
+        current_user = self.request.user
+        print(current_user)
+        context['form'] = NewPost(initial={'writer':current_user})
         context['latest_posts'] = super(home,self).get_queryset().order_by("-timestamp")[:5]
         return context
 

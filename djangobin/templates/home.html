@@ -68,7 +68,7 @@
                     <a href="#">{{ post.title|capfirst }}</a>
                 </h2>
                 <p class="lead">
-                    by <a href="#">{{ post.writer.first_name }} {{ post.writer.last_name }}</a>
+                    by <a href="#">{{ post.writer.get_full_name }}</a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.timestamp }}</p>
                 <hr>
