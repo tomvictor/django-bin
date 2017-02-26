@@ -27,7 +27,7 @@ class all_posts(ListView):
     context_object_name = 'all_posts'
 
 class home(ListView):
-    queryset = Post.objects.all().order_by("-timestamp")
+    queryset = Post.objects.all().order_by("timestamp")
     template_name = 'home.html'
     context_object_name = 'all_posts'
 
@@ -35,9 +35,9 @@ class home(ListView):
         # Call the base implementation first to get a context
         context = super(home, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        current_user = self.request.user
-        print(current_user)
-        context['form'] = NewPost(initial={'writer':current_user})
+        # current_user = self.request.user
+        # print(current_user)
+        context['form'] = NewPost()
         context['latest_posts'] = super(home,self).get_queryset().order_by("-timestamp")[:5]
         return context
 
