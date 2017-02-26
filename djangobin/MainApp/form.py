@@ -31,3 +31,14 @@ class NewPost(forms.ModelForm):
             'content': Textarea(attrs={'cols': 80, 'rows': 13}),
             'status' : RadioSelect
         }
+
+class LoginForm(forms.Form):
+    username = forms.EmailField(max_length=100)
+    password = forms.CharField(widget=forms.PasswordInput)
+    remember = forms.BooleanField(label="Remember Me", )
+
+class SignUpForm(forms.Form):
+    firstname = forms.CharField(max_length=100)
+    lastname = forms.CharField(max_length=100)
+    username = forms.EmailField(max_length=100)
+    password = forms.CharField()

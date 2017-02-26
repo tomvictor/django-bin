@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^user/$',views.single_user,name='single-user'),
     url(r'^loginform/$',views.login_form,name='login-form-handler'),
     url(r'^all/$',views.all_pastes,name='view-all'),
+    url(r'^formhandle/$',views.all_pastes,name='view-all'),
+    url(r'^signup/$',views.sign_up_view,name='sign-up'),
 ]

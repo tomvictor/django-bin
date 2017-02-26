@@ -56,7 +56,7 @@
 
 
                 <div class="row ">
-                    <form role="form">
+                    <form role="form" action="/formhandle/" method="post">
                         {% csrf_token %}
                         {{ form|crispy }}
 

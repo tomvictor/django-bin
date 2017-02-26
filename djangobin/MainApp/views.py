@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 #forms
-from .form import NewPost
+from .form import NewPost, LoginForm, SignUpForm
 # Create your views here.
 
 def home(request):
@@ -13,7 +13,17 @@ def home(request):
     return render(request,'home.html',context_pass)
 
 def login(request):
-    return render(request,'login.html',{})
+    context_pass = {
+        'form': LoginForm
+    }
+    return render(request,'login.html',context_pass)
+
+def sign_up_view(request):
+    context_pass = {
+        'form': SignUpForm
+    }
+    return render(request,'login.html',context_pass)
+
 
 def login_form(request):
     if request.method == 'POST':
