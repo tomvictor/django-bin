@@ -26,10 +26,7 @@ class NewPost(forms.ModelForm):
             },
         }
 
-        VISIBILITY_CHOICES = (
-            ('public', 'public'),
-            ('private', 'private'),
-        )
+
         widgets = {
             'content': Textarea(attrs={'cols': 80, 'rows': 13}),
             'status' : RadioSelect
