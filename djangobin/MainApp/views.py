@@ -38,7 +38,11 @@ def signup_form(request):
             firstname = form.cleaned_data.get("firstname")
             lastname = form.cleaned_data.get("lastname")
             user = User.objects.create_user(username, username, password)
-    return redirect("mainSiteApp:LoginPage")
+            user.first_name = firstname
+            user.last_name = lastname
+            user.save()
+            messages.success(request, "Hi,%s ! You have been Succesfully Signed Up, Please Login Again " % (firstname))
+    return redirect("MainApp:login")
 
 
 def login_form(request):
@@ -62,7 +66,7 @@ def login_form(request):
             messages.success(request, "The username and password were incorrect,or you may not activated.check your mail for activation link ")
             return redirect("MainApp:login")
 
-    return redirect("mainSiteApp:LoginPage")
+    return redirect("MainApp:login")
 
 
 
@@ -71,6 +75,18 @@ def logout_view(request):
     logout(request)
     messages.success(request, "You have been logged out Succesfully")
     return HttpResponseRedirect('/login/')
+
+
+def post_form_upload(request):
+    if request.method == 'POST':
+        form = NewPost(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("MainApp:home")
+    else:
+        messages.success(request, " form not saved due to error")
+    return redirect("MainApp:home")
+
 
 
 def single_post(request):

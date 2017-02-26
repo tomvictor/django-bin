@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from MainApp import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$',views.home,name='home'),
@@ -13,5 +15,10 @@ urlpatterns = [
     url(r'^loginform/$',views.login_form,name='login-form-handler'),
     url(r'^signupform/$',views.signup_form,name='signup-form-handler'),
     url(r'^formhandle/$',views.all_pastes,name='view-all'),
+    url(r'^postformhandle/$',views.post_form_upload,name='post-form'),
 
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -9,6 +9,8 @@ class NewPost(forms.ModelForm):
         fields =[
             "title",
             "content",
+            "image",
+            "files",
             "status"
         ]
         labels = {

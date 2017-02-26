@@ -9,10 +9,15 @@ VISIBILITY_CHOICES = (
     ('private', 'private'),
 )
 
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return '{0}/{1}'.format(instance.writer.username, filename)
 
 class Post(models.Model):
     title = models.CharField(max_length=500)
     content = models.TextField()
+    image = models.ImageField(blank=True,null=True,upload_to=user_directory_path)
+    files = models.FileField(blank=True,null=True)
     status = models.CharField(max_length=100, choices=VISIBILITY_CHOICES,default='public')
     timestamp = models.DateTimeField(default=datetime.now())
     writer = models.ForeignKey(settings.AUTH_USER_MODEL,default=1)
