@@ -1,18 +1,16 @@
 from django import forms
+from django.forms import Textarea
+from MainApp.models import Post
 
 
-BIRTH_YEAR_CHOICES = ('1980', '1981', '1982')
-FAVORITE_COLORS_CHOICES = (
-    ('public', 'public'),
-    ('private', 'private'),
-)
-
-class NewPaste(forms.Form):
-    title = forms.CharField(label='Title',max_length=1000)
-    content = forms.CharField(label='Content', widget=forms.Textarea)
-    forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES))
-    visibility = forms.ChoiceField(
-        required=False,
-        widget=forms.RadioSelect,
-        choices=FAVORITE_COLORS_CHOICES,
-    )
+class NewPost(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields =[
+            "title",
+            "content",
+            "status"
+        ]
+        widgets = {
+            'content': Textarea(attrs={'cols': 80, 'rows': 15}),
+        }

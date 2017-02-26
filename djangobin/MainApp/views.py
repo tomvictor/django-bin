@@ -3,12 +3,12 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 #forms
-from .form import NewPaste
+from .form import NewPost
 # Create your views here.
 
 def home(request):
     context_pass = {
-        'form':NewPaste
+        'form':NewPost
     }
     return render(request,'home.html',context_pass)
 
