@@ -19,6 +19,7 @@ class NewPost(forms.ModelForm):
             'content': 'Content'
         }
 
+
         help_texts = {
             'status' : 'Please login for Private posts'
         }
@@ -31,7 +32,7 @@ class NewPost(forms.ModelForm):
 
 
         widgets = {
-            'content': Textarea(attrs={'cols': 80, 'rows': 10}),
+            'content': Textarea(attrs={'cols': 80, 'rows': 10,'class':'tinymce'}),
             'status' : RadioSelect,
             'writer' : forms.HiddenInput()
         }
