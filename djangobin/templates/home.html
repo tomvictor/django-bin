@@ -62,7 +62,13 @@
                 </br>
 
 
-            {% for post in custom_objects %}
+
+
+            </div>
+
+
+             {% for post in custom_objects %}
+                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
               <!-- First Blog Post -->
                 <h2>
                     <a href="#">{{ post.title|capfirst }}</a>
@@ -83,12 +89,15 @@
 
                 <hr>
 
+                   </div>
             {% endfor %}
 
 
 
 
-                <!-- Pager -->
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+              <!-- Pager -->
                 <ul class="pager">
                     <li class="previous">
                         <a href="#">&larr; Older</a>
@@ -104,7 +113,9 @@
                     <p>&copy; 2016 Technorip, Inc.</p>
                 </footer>
 
-            </div>
+        </div>
+
+
         </div>
 
 
