@@ -144,12 +144,12 @@
         <option value="$PROJECT_DIR$/MainApp/static/datatable/dataTables.bootstrap.min.css" />
         <option value="$PROJECT_DIR$/MainApp/static/datatable/jquery.dataTables.min.js" />
         <option value="$PROJECT_DIR$/MainApp/static/datatable/dataTables.bootstrap.min.js" />
-        <option value="$PROJECT_DIR$/templates/all-posts.html" />
         <option value="$PROJECT_DIR$/templates/navbar.html" />
         <option value="$PROJECT_DIR$/MainApp/urls.py" />
         <option value="$PROJECT_DIR$/MainApp/views.py" />
         <option value="$PROJECT_DIR$/templates/home.html" />
         <option value="$PROJECT_DIR$/templates/detail-view.html" />
+        <option value="$PROJECT_DIR$/templates/all-posts.html" />
       </list>
     </option>
   </component>
@@ -919,14 +919,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/all-posts.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="91" column="21" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/navbar.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -977,6 +969,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="26" column="37" lean-forward="true" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/all-posts.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="27" column="76" lean-forward="false" selection-start-line="27" selection-start-column="76" selection-end-line="27" selection-end-column="76" />
           <folding />
         </state>
       </provider>
