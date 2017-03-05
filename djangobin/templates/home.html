@@ -16,6 +16,8 @@
     <div class="container">
 
 
+
+
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
@@ -24,6 +26,7 @@
                     {% for object in latest_posts %}
                          <li><a href="#">{{ object.title|title }} ({{ object.timestamp|timesince }} before)</a></li>
                     {% endfor %}
+                <li><a href="/all/">View All</a></li>
 
                 </ul>
 
@@ -60,6 +63,9 @@
                 <hr>
 
                 </br>
+
+
+
 
 
 {#            {% for post in custom_objects %}#}
