@@ -50,7 +50,7 @@
 
 
                 <div class="row ">
-                    <form role="form" action="/postformhandle/" method="post" enctype="multipart/form-data">
+                    <form role="form" action="/postformhandle/" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form|crispy }}
 
