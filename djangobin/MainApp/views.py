@@ -28,7 +28,7 @@ class all_posts(ListView):
 
 class home(ListView):
     queryset = Post.objects.all()
-    template_name = 'home.html'
+    # template_name = 'home.html'
     context_object_name = 'all_posts'
 
     def get_context_data(self, **kwargs):
@@ -46,7 +46,6 @@ class home(ListView):
         context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:15]
         context['custom_objects'] = Post.objects.all().order_by("-timestamp")
         return context
-
 
 
 def login(request):
