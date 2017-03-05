@@ -49,15 +49,7 @@
                 {% endif %}
 
 
-                <div class="row ">
-                    <form role="form" action="/postformhandle/" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ form|crispy }}
 
-                        <button class="btn btn-lg btn-success " type="submit">Submit</button>
-                    </form>
-
-                </div>
 
                 </br>
                 <hr>
@@ -67,42 +59,6 @@
 
 
 
-
-{#            {% for post in custom_objects %}#}
-{#              <!-- First Blog Post -->#}
-{#                <h2>#}
-{#                    <a href="#">{{ post.title|capfirst }}</a>#}
-{#                </h2>#}
-{#                <p class="lead">#}
-{#                    by <a href="#">{{ post.writer.first_name }}</a>#}
-{#                </p>#}
-{#                <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.timestamp }}</p>#}
-{#                <hr>#}
-{#                {% if  post.image %}#}
-{#                    <img class="img-responsive" src="{{ post.image.url }}" alt="">#}
-{#                  <hr>#}
-{#                {% endif %}#}
-{##}
-{#                <p>{{ post.content|safe|escape }}</p>#}
-{#                <a class="btn btn-primary" href="#">Read More <span#}
-{#                        class="glyphicon glyphicon-chevron-right"></span></a>#}
-{##}
-{#                <hr>#}
-{##}
-{#            {% endfor %}#}
-
-
-
-{##}
-{#                <!-- Pager -->#}
-{#                <ul class="pager">#}
-{#                    <li class="previous">#}
-{#                        <a href="#">&larr; Older</a>#}
-{#                    </li>#}
-{#                    <li class="next">#}
-{#                        <a href="#">Newer &rarr;</a>#}
-{#                    </li>#}
-{#                </ul>#}
 
 
 

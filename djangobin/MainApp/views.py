@@ -26,14 +26,14 @@ class all_posts(ListView):
     template_name = 'all-posts.html'
     context_object_name = 'all_posts'
 
-class home(ListView):
+class base_view(ListView):
     queryset = Post.objects.all()
     # template_name = 'home.html'
     context_object_name = 'all_posts'
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
-        context = super(home, self).get_context_data(**kwargs)
+        context = super(base_view, self).get_context_data(**kwargs)
         #Add in a QuerySet of all the books
         current_user = self.request.user
         if current_user.is_authenticated:
@@ -47,6 +47,14 @@ class home(ListView):
         context['custom_objects'] = Post.objects.all().order_by("-timestamp")
         return context
 
+
+class post_detail_view(DetailView):
+    model = Post
+    context_object_name = 'thisPost'
+    def get_context_data(self, **kwargs):
+        context = super(post_detail_view, self).get_context_data(**kwargs)
+        context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:15]
+        return context
 
 def login(request):
     context_pass = {

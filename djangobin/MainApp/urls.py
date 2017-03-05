@@ -4,8 +4,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^$',views.home.as_view(template_name='home.html'),name='home'),
-    url(r'^all/$',views.home.as_view(template_name='all-posts.html'),name='view-all'),
+    url(r'^$',views.base_view.as_view(template_name='home.html'),name='home'),
+    url(r'^all/$',views.base_view.as_view(template_name='all-posts.html'),name='view-all'),
+    url(r'^(?P<pk>[-\w]+)/$', views.post_detail_view.as_view(template_name='detail-view.html'), name='detail'),
     url(r'^login/$',views.login,name='login'),
     url(r'^logout/$',views.logout_view,name='logout'),
     url(r'^signup/$',views.sign_up_view,name='sign-up'),
