@@ -17,7 +17,7 @@ def user_directory_path(instance, filename):
 
 class Post(models.Model):
     title = models.CharField(max_length=500)
-    content = models.TextField()
+    content = models.TextField(blank=True, null=True)
     image = models.ImageField(blank=True,null=True,upload_to=user_directory_path)
     files = models.FileField(blank=True,null=True)
     status = models.CharField(max_length=100, choices=VISIBILITY_CHOICES,default='public')

@@ -44,6 +44,7 @@ class home(ListView):
         print(current_user)
         context['form'] = NewPost(initial={'writer': context_user})
         context['latest_posts'] = super(home,self).get_queryset().order_by("timestamp")[5:]
+        context['custom_objects'] = Post.objects.all()
         return context
 
 
