@@ -25,7 +25,7 @@
 {#                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>#}
 
                     {% for object in latest_posts %}
-                         <li><a href=" {% url 'MainApp:detail' object.id %}">{{ object.title|title }} ({{ object.timestamp|timesince }} before)</a></li>
+                         <li><a href=" {% url 'MainApp:detail' object.id %} ">{{ object.title|title }} ({{ object.timestamp|timesince }} before)</a></li>
                     {% endfor %}
 
                 </ul>
@@ -81,7 +81,9 @@
         {% for post in custom_objects %}
 
             <tr>
-                <td>{{ post.title|capfirst }}</td>
+                <td><a href=" {% url 'MainApp:detail' post.id %} ">
+                    {{ post.title|capfirst }}
+                </a></td>
                 <td>
                     {% if post.files %}
                         <a href="{{ post.files.url }}" target="_blank">

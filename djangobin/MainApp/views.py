@@ -121,6 +121,7 @@ def logout_view(request):
 
 
 def post_form_upload(request):
+    print(request)
     if request.method == 'POST':
         form = NewPost(request.POST, request.FILES)
         if form.is_valid():
