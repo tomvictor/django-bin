@@ -25,7 +25,7 @@ SECRET_KEY = '&3typ1$pmh!2*-2x9!7cvd*hpwebooc@m=tlwrua6hk)#s(r&6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.pasteway.com','pasteway.com']
 
 
 # Application definition

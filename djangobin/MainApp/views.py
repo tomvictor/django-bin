@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.shortcuts import get_object_or_404
+from datetime import datetime
 #forms
 from .form import NewPost, LoginForm, SignUpForm
 # Modals
@@ -42,7 +43,7 @@ class base_view(ListView):
             context_user = get_object_or_404(Post,id=1)
 
         print(current_user)
-        context['form'] = NewPost(initial={'writer': context_user})
+        context['form'] = NewPost(initial={'writer': context_user,'timestamp':datetime.now()})
         context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:15]
         context['custom_objects'] = Post.objects.all().order_by("-timestamp")
         return context
@@ -125,6 +126,8 @@ def post_form_upload(request):
     if request.method == 'POST':
         form = NewPost(request.POST, request.FILES)
         if form.is_valid():
+            form.timestamp = datetime.now()
+            print(form)
             form.save()
             return redirect("MainApp:home")
     else:

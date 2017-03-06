@@ -13,6 +13,7 @@ class NewPost(forms.ModelForm):
             "files",
             "status",
             "writer",
+            "timestamp"
         ]
         labels = {
             'title': 'Title',
@@ -34,7 +35,8 @@ class NewPost(forms.ModelForm):
         widgets = {
             'content': Textarea(attrs={'cols': 80, 'rows': 10,'class':'tinymce'}),
             'status' : RadioSelect,
-            'writer' : forms.HiddenInput()
+            'writer' : forms.HiddenInput(),
+            'timestamp': forms.HiddenInput(),
         }
 
 class LoginForm(forms.Form):

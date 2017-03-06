@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="bd16ad08-4fa3-4aa0-8545-6d6efcfa7ebf" name="ssd server" url="http://technorip.com">
+        <fileTransfer host="technorip.com" port="22" privateKey="$USER_HOME$/Documents/server-folder/ProductionServer" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
