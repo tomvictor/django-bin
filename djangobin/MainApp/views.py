@@ -44,7 +44,7 @@ class base_view(ListView):
 
         print(current_user)
         context['form'] = NewPost(initial={'writer': context_user,'timestamp':datetime.now()})
-        context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:15]
+        context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:12]
         context['custom_objects'] = Post.objects.all().order_by("-timestamp")
         return context
 
@@ -54,7 +54,7 @@ class post_detail_view(DetailView):
     context_object_name = 'thisPost'
     def get_context_data(self, **kwargs):
         context = super(post_detail_view, self).get_context_data(**kwargs)
-        context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:15]
+        context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:12]
         return context
 
 def login(request):
