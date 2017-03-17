@@ -44,7 +44,11 @@ class base_view(ListView):
             context_user = get_object_or_404(User,id=1)
 
         print(current_user)
-        context['form'] = NewPost(initial={'writer': context_user,'timestamp':datetime.now()})
+        formInitials = {
+            'writer': context_user,
+            'timestamp': datetime.now()
+        }
+        context['form'] = NewPost(initial=formInitials)
         context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:18]
         context['custom_objects'] = Post.objects.all().order_by("-timestamp")
         return context
