@@ -30,7 +30,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return "tom"
+        return "/post/%d"%(self.id)
 
 
 class Comments(models.Model):
