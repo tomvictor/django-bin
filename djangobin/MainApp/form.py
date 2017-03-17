@@ -13,7 +13,7 @@ class NewPost(forms.ModelForm):
             "files",
             "status",
             "writer",
-            "timestamp"
+            "timestamp",
         ]
         labels = {
             'title': 'Title',

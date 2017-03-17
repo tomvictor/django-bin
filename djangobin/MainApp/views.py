@@ -13,6 +13,7 @@ from datetime import datetime
 from .form import NewPost, LoginForm, SignUpForm
 # Modals
 from .models import Post
+from .tom import saltizer
 # Create your views here.
 
 def home_old(request):
@@ -51,6 +52,7 @@ class base_view(ListView):
 
 class post_detail_view(DetailView):
     model = Post
+    slug_url_kwarg = "slug"
     context_object_name = 'thisPost'
     def get_context_data(self, **kwargs):
         context = super(post_detail_view, self).get_context_data(**kwargs)

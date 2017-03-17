@@ -22,7 +22,7 @@
                     {#                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>#}
 
                     {% for object in latest_posts %}
-                        <li><a href=" {% url 'MainApp:detail' object.id %}">{{ object.title|title }}
+                        <li><a href=" {% url 'MainApp:detail' object.slug %}">{{ object.title|title }}
                             ({{ object.timestamp|timesince }} before)</a></li>
                     {% endfor %}
                     <li><a href="/all/">View All</a></li>
@@ -94,7 +94,7 @@
 
                      var disqus_config = function () {
                      this.page.url = {{ thisPost.get_absolute_url }};  // Replace PAGE_URL with your page's canonical URL variable
-                     this.page.identifier = post_{{ thisPost.id }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                     this.page.identifier = {{ thisPost.slug }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
                      };
 
                     (function () { // DON'T EDIT BELOW THIS LINE
@@ -105,7 +105,7 @@
                     })();
                 </script>
                 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
-                    powered by Disqus.</a></noscript>
+                    powered by Pasteway.</a></noscript>
 
 
                 <!-- Blog Comments -->
