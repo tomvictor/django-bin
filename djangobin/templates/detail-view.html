@@ -16,17 +16,16 @@
     <div class="container">
 
 
-
-
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-{#                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>#}
+                    {#                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>#}
 
                     {% for object in latest_posts %}
-                         <li><a href=" {% url 'MainApp:detail' object.id %}">{{ object.title|title }} ({{ object.timestamp|timesince }} before)</a></li>
+                        <li><a href=" {% url 'MainApp:detail' object.id %}">{{ object.title|title }}
+                            ({{ object.timestamp|timesince }} before)</a></li>
                     {% endfor %}
-                <li><a href="/all/">View All</a></li>
+                    <li><a href="/all/">View All</a></li>
 
                 </ul>
 
@@ -46,7 +45,7 @@
 
 
 
-             <!-- Blog Post -->
+                <!-- Blog Post -->
 
                 <!-- Title -->
                 <h1>{{ thisPost.title }}</h1>
@@ -63,84 +62,118 @@
                 <hr>
 
                 <!-- Preview Image -->
-                            {% if  thisPost.image %}
+                {% if  thisPost.image %}
                     <img class="img-responsive" src="{{ thisPost.image.url }}" alt="">
-                  <hr>
+                    <hr>
                 {% endif %}
 
 
 
                 <!-- Post Content -->
-             {{ thisPost.content|safe|escape }}
-{#                <hr>#}
+                {{ thisPost.content|safe|escape }}
+
+                {% if  thisPost.files %}
+
+                    <h4><a href="{{ thisPost.files.url }}" target="_blank"> View attached file</a>
+                    </h4>
+
+
+                {% endif %}
+
+                <hr>
+                {#                <hr>#}
+
+
+                <div id="disqus_thread"></div>
+                <script>
+
+                    /**
+                     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                    /*
+                     var disqus_config = function () {
+                     this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                     this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                     };
+                     */
+                    (function () { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://pasteway.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
+                    powered by Disqus.</a></noscript>
+
 
                 <!-- Blog Comments -->
 
-{#                <!-- Comments Form -->#}
-{#                <div class="well">#}
-{#                    <h4>Leave a Comment:</h4>#}
-{#                    <form role="form">#}
-{#                        <div class="form-group">#}
-{#                            <textarea class="form-control" rows="3"></textarea>#}
-{#                        </div>#}
-{#                        <button type="submit" class="btn btn-primary">Submit</button>#}
-{#                    </form>#}
-{#                </div>#}
-{##}
-{#                <hr>#}
+                {#                <!-- Comments Form -->#}
+                {#                <div class="well">#}
+                {#                    <h4>Leave a Comment:</h4>#}
+                {#                    <form role="form">#}
+                {#                        <div class="form-group">#}
+                {#                            <textarea class="form-control" rows="3"></textarea>#}
+                {#                        </div>#}
+                {#                        <button type="submit" class="btn btn-primary">Submit</button>#}
+                {#                    </form>#}
+                {#                </div>#}
+                {##}
+                {#                <hr>#}
 
-{#                <!-- Posted Comments -->#}
-{##}
-{#                <!-- Comment -->#}
-{#                <div class="media">#}
-{#                    <a class="pull-left" href="#">#}
-{#                        <img class="media-object" src="http://placehold.it/64x64" alt="">#}
-{#                    </a>#}
-{#                    <div class="media-body">#}
-{#                        <h4 class="media-heading">Start Bootstrap#}
-{#                            <small>August 25, 2014 at 9:30 PM</small>#}
-{#                        </h4>#}
-{#                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.#}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{#                <!-- Comment -->#}
-{#                <div class="media">#}
-{#                    <a class="pull-left" href="#">#}
-{#                        <img class="media-object" src="http://placehold.it/64x64" alt="">#}
-{#                    </a>#}
-{#                    <div class="media-body">#}
-{#                        <h4 class="media-heading">Start Bootstrap#}
-{#                            <small>August 25, 2014 at 9:30 PM</small>#}
-{#                        </h4>#}
-{#                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.#}
-{#                        <!-- Nested Comment -->#}
-{#                        <div class="media">#}
-{#                            <a class="pull-left" href="#">#}
-{#                                <img class="media-object" src="http://placehold.it/64x64" alt="">#}
-{#                            </a>#}
-{#                            <div class="media-body">#}
-{#                                <h4 class="media-heading">Nested Start Bootstrap#}
-{#                                    <small>August 25, 2014 at 9:30 PM</small>#}
-{#                                </h4>#}
-{#                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <!-- End Nested Comment -->#}
-{#                    </div>#}
-{#                </div>#}
-{##}
+                {#                <!-- Posted Comments -->#}
+                {##}
+                {#                <!-- Comment -->#}
+                {#                <div class="media">#}
+                {#                    <a class="pull-left" href="#">#}
+                {#                        <img class="media-object" src="http://placehold.it/64x64" alt="">#}
+                {#                    </a>#}
+                {#                    <div class="media-body">#}
+                {#                        <h4 class="media-heading">Start Bootstrap#}
+                {#                            <small>August 25, 2014 at 9:30 PM</small>#}
+                {#                        </h4>#}
+                {#                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.#}
+                {#                    </div>#}
+                {#                </div>#}
+                {##}
+                {#                <!-- Comment -->#}
+                {#                <div class="media">#}
+                {#                    <a class="pull-left" href="#">#}
+                {#                        <img class="media-object" src="http://placehold.it/64x64" alt="">#}
+                {#                    </a>#}
+                {#                    <div class="media-body">#}
+                {#                        <h4 class="media-heading">Start Bootstrap#}
+                {#                            <small>August 25, 2014 at 9:30 PM</small>#}
+                {#                        </h4>#}
+                {#                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.#}
+                {#                        <!-- Nested Comment -->#}
+                {#                        <div class="media">#}
+                {#                            <a class="pull-left" href="#">#}
+                {#                                <img class="media-object" src="http://placehold.it/64x64" alt="">#}
+                {#                            </a>#}
+                {#                            <div class="media-body">#}
+                {#                                <h4 class="media-heading">Nested Start Bootstrap#}
+                {#                                    <small>August 25, 2014 at 9:30 PM</small>#}
+                {#                                </h4>#}
+                {#                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                        <!-- End Nested Comment -->#}
+                {#                    </div>#}
+                {#                </div>#}
+                {##}
 
 
                 </br>
-                <hr>
+                {#                <hr>#}
 
                 </br>
 
 
-{#                <footer>#}
-{#                    <p> Created by <a href="http://github.com/tomvictor" target="_blank">Tom Victor</a>.</p>#}
-{#                </footer>#}
+{#                                <footer>#}
+{#                                    <p> Created by <a href="http://github.com/tomvictor" target="_blank">Tom Victor</a>.</p>#}
+{#                                </footer>#}
 
             </div>
         </div>
@@ -154,9 +187,9 @@
 {% block extrascripts %}
 
     <!-- javascript -->
-		<script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'plugin/tinymce/tinymce.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'plugin/tinymce/init-tinymce.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugin/tinymce/tinymce.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugin/tinymce/init-tinymce.js' %}"></script>
 
 {% endblock %}
 
