@@ -55,7 +55,7 @@ class post_detail_view(DetailView):
     context_object_name = 'thisPost'
     def get_context_data(self, **kwargs):
         context = super(post_detail_view, self).get_context_data(**kwargs)
-        context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:18]
+        context['latest_posts'] = Post.objects.all().filter(status="public").order_by("-timestamp")[:18]
         return context
 
 def login(request):
@@ -130,7 +130,8 @@ def post_form_upload(request):
             form.timestamp = datetime.now()
             print(form)
             form.save()
-            return redirect("MainApp:home")
+            last_post = Post.objects.all().last()
+            return redirect("MainApp:detail", last_post.slug)
     else:
         messages.success(request, "form not saved due to error")
     return redirect("MainApp:home")
