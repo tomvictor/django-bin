@@ -74,6 +74,13 @@
              {{ thisPost.content|safe|escape }}
 {#                <hr>#}
 
+             {% if  thisPost.files %}
+                    <h4><a href="{{ thisPost.files.url }}" target="_blank">
+                        View Attachements
+                    </a></h4>
+                  <hr>
+                {% endif %}
+
                 <!-- Blog Comments -->
 
 {#            <h1>{{ thisPost.get_absolute_url }}</h1>#}
