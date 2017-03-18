@@ -28,7 +28,8 @@ class all_posts(ListView):
     context_object_name = 'all_posts'
 
 class base_view(ListView):
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().filter(status="public")
+    print(queryset)
     # template_name = 'home.html'
     context_object_name = 'all_posts'
 
@@ -44,8 +45,7 @@ class base_view(ListView):
 
         print(current_user)
         context['form'] = NewPost(initial={'writer': context_user,'timestamp':datetime.now()})
-        context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:18]
-        context['custom_objects'] = Post.objects.all().order_by("-timestamp")
+        context['latest_posts'] = Post.objects.all().filter(status="public").order_by("-timestamp")[:18]
         return context
 
 

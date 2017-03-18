@@ -78,7 +78,7 @@
         <tbody>
 
 
-        {% for post in custom_objects %}
+        {% for post in all_posts %}
 
             <tr>
                 <td><a href=" {% url 'MainApp:detail' post.slug %} ">
