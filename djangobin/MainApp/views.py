@@ -48,13 +48,17 @@ class base_view(ListView):
         context['latest_posts'] = Post.objects.all().filter(status="public").order_by("-timestamp")[:18]
         return context
 
-
-class privatePosts(base_view):
-    def get_context_data(self, **kwargs):
-        context = context = super(base_view, self).get_context_data(**kwargs)
-        context['privatePosts'] = Post.objects.filter(writer=self.request.user).filter(status="private")
-        print(context)
-        return context
+# @login_required
+# class privatePosts(ListView):
+#     queryset = Post.objects.all().filter(status="public")
+#     print(queryset)
+#     # template_name = 'home.html'
+#     context_object_name = 'all_posts'
+#     def get_context_data(self, **kwargs):
+#         context = context = super(privatePosts, self).get_context_data(**kwargs)
+#         context['privatePosts'] = Post.objects.filter(writer=self.request.user).filter(status="private")
+#         print(context)
+#         return context
 
 class post_detail_view(DetailView):
     model = Post
