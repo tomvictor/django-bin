@@ -40,21 +40,22 @@ class base_view(ListView):
         if current_user.is_authenticated:
             context_user = current_user
         else:
-            context_user = get_object_or_404(Post,id=1)
+            context_user = get_object_or_404(User,id=1)
 
         print(current_user)
         context['form'] = NewPost(initial={'writer': context_user,'timestamp':datetime.now()})
-        context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:12]
+        context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:18]
         context['custom_objects'] = Post.objects.all().order_by("-timestamp")
         return context
 
 
 class post_detail_view(DetailView):
     model = Post
+    query_pk_and_slug = "slug"
     context_object_name = 'thisPost'
     def get_context_data(self, **kwargs):
         context = super(post_detail_view, self).get_context_data(**kwargs)
-        context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:12]
+        context['latest_posts'] = Post.objects.all().order_by("-timestamp")[:18]
         return context
 
 def login(request):

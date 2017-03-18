@@ -81,7 +81,7 @@
         {% for post in custom_objects %}
 
             <tr>
-                <td><a href=" {% url 'MainApp:detail' post.id %} ">
+                <td><a href=" {% url 'MainApp:detail' post.slug %} ">
                     {{ post.title|capfirst }}
                 </a></td>
                 <td>

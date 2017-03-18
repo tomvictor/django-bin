@@ -2,8 +2,14 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.admin import User
 from django.conf import settings
+
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
+
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from .tom import saltizer
+
 
 # Create your models here.
 VISIBILITY_CHOICES = (
@@ -25,17 +31,29 @@ class Post(models.Model):
     writer = models.ForeignKey(settings.AUTH_USER_MODEL,default=1)
     hits = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
+    slug = models.SlugField(blank=True, default=None, unique=True)
 
     def __str__(self):
         return self.title
+    def get_absolute_url(self):
+        if settings.DEBUG:
+            return "http://127.0.0.1:8000/%s" % (self.slug)
+        return "http://pasteway.com/%s" % (self.slug)
 
 
-class Comments(models.Model):
-    writer = models.ForeignKey(settings.AUTH_USER_MODEL,default=1)
-    post = models.ForeignKey(Post,default=1)
-    content = models.TextField(null=True,blank=True)
+def create_slug(instance, new_slug=None):
+    slug = saltizer()
+    if new_slug is not None:
+        slug = new_slug
+    qs = Post.objects.filter(slug=slug).order_by("-id")
+    exists = qs.exists()
+    if exists:
+        new_slug = "%s%s" %(slug,saltizer())
+        return create_slug(instance,new_slug=new_slug)
+    return slug
 
-    def __str__(self):
-        return str(self.post)
+def pre_save_post_receiver(sender,instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = create_slug(instance)
 
-
+pre_save.connect(pre_save_post_receiver, sender=Post)

@@ -24,7 +24,7 @@
 {#                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>#}
 
                     {% for object in latest_posts %}
-                         <li><a href=" {% url 'MainApp:detail' object.id %}">{{ object.title|title }} ({{ object.timestamp|timesince }} before)</a></li>
+                         <li><a href=" {% url 'MainApp:detail' object.slug %}">{{ object.title|title }} ({{ object.timestamp|timesince }} before)</a></li>
                     {% endfor %}
                 <li><a href="/all/">View All</a></li>
 
@@ -75,6 +75,30 @@
 {#                <hr>#}
 
                 <!-- Blog Comments -->
+
+            <h1>{{ thisPost.get_absolute_url }}</h1>
+
+            <div id="disqus_thread"></div>
+                <script>
+                    /**
+                     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                     var disqus_config = function () {
+                         var  canurl = "{{ thisPost.get_absolute_url }}" ;
+                     this.page.url = canurl;  // Replace PAGE_URL with your page's canonical URL variable
+                     this.page.identifier = "{{ thisPost.slug }}" ; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                     };
+                    (function () { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://pasteway.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
+                    powered by Pasteway.</a></noscript>
+
+
 
 {#                <!-- Comments Form -->#}
 {#                <div class="well">#}
