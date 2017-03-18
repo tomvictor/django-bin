@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load  staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block extrahead %}
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/jumbotron.css' %}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <link href="{% static 'datatable/dataTables.bootstrap.min.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+
+
+
+
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+{#                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>#}
+
+                    {% for object in latest_posts %}
+                         <li><a href=" {% url 'MainApp:detail' object.slug %} ">{{ object.title|title }} ({{ object.timestamp|timesince }} before)</a></li>
+                    {% endfor %}
+
+                <li><a href="/all/">View All</a></li>
+                </ul>
+
+
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+                <h1 class="page-header">
+                    Paste Way
+                    <small>an ultra minimal <kbd>ctl+v</kbd></small>
+                </h1>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-info alert-dismissible" id="faded" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <strong>{{ message }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+
+
+
+
+
+
+            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Attachements</th>
+                <th>writer</th>
+                <th>Likes</th>
+                <th>Hits</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Title</th>
+                <th>Attachements</th>
+                <th>writer</th>
+                <th>Likes</th>
+                <th>Hits</th>
+                <th>Timestamp</th>
+            </tr>
+        </tfoot>
+        <tbody>
+
+
+        {% for post in privatePosts %}
+
+            <tr>
+                <td><a href=" {% url 'MainApp:detail' post.slug %} ">
+                    {{ post.title|capfirst }}
+                </a></td>
+                <td>
+                    {% if post.files %}
+                        <a href="{{ post.files.url }}" target="_blank">
+                            <button type="button" class="btn btn-block btn-primary">View</button>
+                        </a>
+                    {% endif %}
+
+                </td>
+                <td>{{ post.writer.first_name }} </td>
+                <td>{{ post.likes }}</td>
+                <td>{{ post.hits }}</td>
+                <td>{{ post.timestamp }}</td>
+            </tr>
+
+         {% endfor %}
+
+{#                    {% for post in custom_objects %}#}
+{#              <!-- First Blog Post -->#}
+{#                <h2>#}
+{#                    <a href="#">{{ post.title|capfirst }}</a>#}
+{#                </h2>#}
+{#                <p class="lead">#}
+{#                    by <a href="#">{{ post.writer.first_name }}</a>#}
+{#                </p>#}
+{#                <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.timestamp }}</p>#}
+{#                <hr>#}
+{#                {% if  post.image %}#}
+{#                    <img class="img-responsive" src="{{ post.image.url }}" alt="">#}
+{#                  <hr>#}
+{#                {% endif %}#}
+{##}
+{#                <p>{{ post.content|safe|escape }}</p>#}
+{#                <a class="btn btn-primary" href="#">Read More <span#}
+{#                        class="glyphicon glyphicon-chevron-right"></span></a>#}
+{##}
+{#                <hr>#}
+{##}
+{#            {% endfor %}#}
+
+
+        </tbody>
+    </table>
+
+
+{#            {% for post in custom_objects %}#}
+{#              <!-- First Blog Post -->#}
+{#                <h2>#}
+{#                    <a href="#">{{ post.title|capfirst }}</a>#}
+{#                </h2>#}
+{#                <p class="lead">#}
+{#                    by <a href="#">{{ post.writer.first_name }}</a>#}
+{#                </p>#}
+{#                <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.timestamp }}</p>#}
+{#                <hr>#}
+{#                {% if  post.image %}#}
+{#                    <img class="img-responsive" src="{{ post.image.url }}" alt="">#}
+{#                  <hr>#}
+{#                {% endif %}#}
+{##}
+{#                <p>{{ post.content|safe|escape }}</p>#}
+{#                <a class="btn btn-primary" href="#">Read More <span#}
+{#                        class="glyphicon glyphicon-chevron-right"></span></a>#}
+{##}
+{#                <hr>#}
+{##}
+{#            {% endfor %}#}
+
+
+
+{##}
+{#                <!-- Pager -->#}
+{#                <ul class="pager">#}
+{#                    <li class="previous">#}
+{#                        <a href="#">&larr; Older</a>#}
+{#                    </li>#}
+{#                    <li class="next">#}
+{#                        <a href="#">Newer &rarr;</a>#}
+{#                    </li>#}
+{#                </ul>#}
+
+
+                <br>
+                <br>
+                <br>
+                <hr>
+
+
+                <footer>
+                    <p> Created by <a href="http://github.com/tomvictor" target="_blank">Tom Victor</a>.</p>
+                </footer>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+{% endblock %}
+
+{% block extrascripts %}
+
+
+
+    <!-- javascript -->
+		<script type="text/javascript" src="{% static 'datatable/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'datatable/dataTables.bootstrap.min.js' %}"></script>
+   <script>
+     $(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+    </script>
+
+{% endblock %}
+
+
+

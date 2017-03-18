@@ -49,6 +49,13 @@ class base_view(ListView):
         return context
 
 
+class privatePosts(base_view):
+    def get_context_data(self, **kwargs):
+        context = context = super(base_view, self).get_context_data(**kwargs)
+        context['privatePosts'] = Post.objects.filter(writer=self.request.user).filter(status="private")
+        print(context)
+        return context
+
 class post_detail_view(DetailView):
     model = Post
     query_pk_and_slug = "slug"

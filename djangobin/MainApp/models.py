@@ -37,7 +37,7 @@ class Post(models.Model):
         return self.title
     def get_absolute_url(self):
         if settings.DEBUG:
-            return "http://127.0.0.1:8000/%s" % (self.slug)
+            return "http://pasteway.com/%s" % (self.slug)
         return "http://pasteway.com/%s" % (self.slug)
 
 
