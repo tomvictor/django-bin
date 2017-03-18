@@ -9,8 +9,11 @@ from django.utils.text import slugify
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .tom import saltizer
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/master
 # Create your models here.
 VISIBILITY_CHOICES = (
     ('public', 'public'),
@@ -31,6 +34,7 @@ class Post(models.Model):
     writer = models.ForeignKey(settings.AUTH_USER_MODEL,default=1)
     hits = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
+<<<<<<< HEAD
     slug = models.SlugField(blank=True, default=None, unique=True)
 
     def __str__(self):
@@ -57,3 +61,41 @@ def pre_save_post_receiver(sender,instance, *args, **kwargs):
         instance.slug = create_slug(instance)
 
 pre_save.connect(pre_save_post_receiver, sender=Post)
+=======
+    #slug = models.SlugField(blank=True, default=saltizer(), unique=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return "pasteway.com/%s" % (self.slug)
+
+
+class Comments(models.Model):
+    writer = models.ForeignKey(settings.AUTH_USER_MODEL,default=1)
+    post = models.ForeignKey(Post,default=1)
+    content = models.TextField(null=True,blank=True)
+
+    def __str__(self):
+        return str(self.post)
+
+
+
+
+# def create_slug(instance, new_slug=None):
+#     slug = saltizer()
+#     if new_slug is not None:
+#         slug = new_slug
+#     qs = Post.objects.filter(slug=slug).order_by("-id")
+#     exists = qs.exists()
+#     if exists:
+#         new_slug = "%s%s" %(slug,saltizer())
+#         return create_slug(instance,new_slug=new_slug)
+#     return slug
+#
+# def pre_save_post_receiver(sender,instance, *args, **kwargs):
+#     if not instance.slug:
+#         instance.slug = create_slug(instance)
+#
+# pre_save.connect(pre_save_post_receiver, sender=Post)
+>>>>>>> origin/master
