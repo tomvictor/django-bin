@@ -33,10 +33,22 @@
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
+{#                <h1 class="page-header">#}
+{#                    Paste Way#}
+{#                    <small>an ultra minimal <kbd>ctl+v</kbd></small>#}
+{#                </h1>#}
+
+            <center>
+                <img class="img-responsive" src="{% static "logo/pasteway.png" %}" alt="" width="450">
+            </center>
+
+            <center>
                 <h1 class="page-header">
-                    Paste Way
-                    <small>an ultra minimal <kbd>ctl+v</kbd></small>
+{#                    Paste Way#}
+                    <small>An ultra minimal <kbd>ctl+v</kbd></small>
                 </h1>
+            </center>
+
 
                 {% if messages %}
                     {% for message in messages %}
