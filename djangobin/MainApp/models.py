@@ -35,6 +35,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    # class Meta:
+    #     ordering = ('timestamp')
+
     def get_absolute_url(self):
         if settings.DEBUG:
             return "http://pasteway.com/%s" % (self.slug)
