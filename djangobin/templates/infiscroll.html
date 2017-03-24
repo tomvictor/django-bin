@@ -199,8 +199,9 @@
                             var post = '<li>';
                             post += '<article>';
                             post += '<header><h1>';
-                            post += html.next;
-                            post +=  ' tom</h1></header>';
+                            post += html.results[0].title;
+                            post +=  ' </h1></header>';
+                            post +=  html.results[0].content;
                             post += '</article>';
                             post += '</li>';
                              $('#posts').append(post);

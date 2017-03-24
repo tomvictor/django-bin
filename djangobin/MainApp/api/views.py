@@ -15,7 +15,7 @@ class MsgCreateAPIView(CreateAPIView):
 
 
 class MsgListAPIView(ListAPIView):
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by("-timestamp")
     serializer_class = MsgListSerializer
 
 
