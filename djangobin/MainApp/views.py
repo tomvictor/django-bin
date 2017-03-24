@@ -29,7 +29,7 @@ class all_posts(ListView):
 
 class base_view(ListView):
     queryset = Post.objects.all().filter(status="public")
-    print(queryset)
+    # print(queryset)
     # template_name = 'home.html'
     context_object_name = 'all_posts'
 
@@ -147,11 +147,4 @@ def post_form_upload(request):
         messages.success(request, "form not saved due to error")
     return redirect("MainApp:home")
 
-
-
-def single_post(request):
-    return render(request,'single-post.html',{})
-
-def single_user(request):
-    return render(request,'single-user.html',{})
 

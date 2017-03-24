@@ -25,7 +25,6 @@ class MsgCreateSerializer(ModelSerializer):
         fields = [
             'title',
             'content',
-            'battery',
             'deviceId',
             'status',
         ]

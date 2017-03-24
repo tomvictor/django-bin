@@ -54,6 +54,7 @@ def create_slug(instance, new_slug=None):
 
 def pre_save_post_receiver(sender,instance, *args, **kwargs):
     instance.timestamp = datetime.now()
+    print(instance)
     if not instance.slug:
         instance.slug = create_slug(instance)
 
