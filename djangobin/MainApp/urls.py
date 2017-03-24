@@ -16,10 +16,7 @@ urlpatterns = [
     url(r'^login/$',views.login,name='login'),
     url(r'^logout/$',views.logout_view,name='logout'),
     url(r'^signup/$',views.sign_up_view,name='sign-up'),
-    url(r'^single/$',views.single_post,name='single-post'),
-    url(r'^user/$',views.single_user,name='single-user'),
     url(r'^(?P<slug>[-\w]+)/$', views.post_detail_view.as_view(template_name='detail-view.html'), name='detail'),
-
 
 ]
 

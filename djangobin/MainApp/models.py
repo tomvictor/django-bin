@@ -27,7 +27,7 @@ class Post(models.Model):
     image = models.ImageField(blank=True,null=True,upload_to=user_directory_path)
     files = models.FileField(blank=True,null=True,upload_to=user_directory_path)
     status = models.CharField(max_length=100, choices=VISIBILITY_CHOICES,default='public')
-    timestamp = models.DateTimeField(default=datetime.now())
+    timestamp = models.DateTimeField(auto_now_add=True)
     writer = models.ForeignKey(settings.AUTH_USER_MODEL,default=1)
     hits = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
@@ -53,7 +53,7 @@ def create_slug(instance, new_slug=None):
     return slug
 
 def pre_save_post_receiver(sender,instance, *args, **kwargs):
-    instance.timestamp = datetime.now()
+    # instance.timestamp = datetime.now()
     print(instance)
     if not instance.slug:
         instance.slug = create_slug(instance)

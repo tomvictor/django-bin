@@ -2,14 +2,15 @@ from rest_framework.serializers import ModelSerializer,HyperlinkedIdentityField
 from MainApp.models import Post
 
 class MsgListSerializer(ModelSerializer):
-    url = HyperlinkedIdentityField(
-        view_name='restapi:api-detail'
-    )
+    # url = HyperlinkedIdentityField(
+    #     view_name='api-detail'
+    # )
     class Meta:
         model = Post
         fields = [
-            'url',
+            # 'url',
             'id',
+            'slug',
             'title',
             'content',
             'status',
@@ -25,23 +26,24 @@ class MsgCreateSerializer(ModelSerializer):
         fields = [
             'title',
             'content',
-            'deviceId',
             'status',
+            'files',
         ]
-
 
 class MsgDetailSerializer(ModelSerializer):
     class Meta:
         model = Post
         fields = [
             'id',
-            'lat',
-            'lng',
-            'battery',
-            'deviceId',
-            'time',
+            'title',
+            'content',
             'status',
+            'writer',
+            'timestamp',
         ]
+
+
+
 
 
 

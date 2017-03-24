@@ -43,7 +43,7 @@ class base_view(ListView):
         else:
             context_user = get_object_or_404(User,id=1)
 
-        print(current_user)
+        # print(current_user)
         context['form'] = NewPost(initial={'writer': context_user,'timestamp':datetime.now()})
         context['latest_posts'] = Post.objects.all().filter(status="public").order_by("-timestamp")[:18]
         return context
@@ -134,12 +134,12 @@ def logout_view(request):
 
 
 def post_form_upload(request):
-    print(request.POST)
+    # print(request.POST)
     if request.method == 'POST':
         form = NewPost(request.POST, request.FILES)
         if form.is_valid():
             form.timestamp = datetime.now()
-            print(form)
+            # print(form)
             form.save()
             last_post = Post.objects.all().last()
             return redirect("MainApp:detail", last_post.slug)
