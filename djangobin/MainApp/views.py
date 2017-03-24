@@ -66,7 +66,7 @@ class post_detail_view(DetailView):
     context_object_name = 'thisPost'
     def get_context_data(self, **kwargs):
         context = super(post_detail_view, self).get_context_data(**kwargs)
-        context['latest_posts'] = Post.objects.all().filter(status="public").order_by("-timestamp")[:18]
+        context['latest_posts'] = Post.objects.all().filter(status="public").order_by("-timestamp")[:9]
         return context
 
 def login(request):

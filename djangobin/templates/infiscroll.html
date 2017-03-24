@@ -48,7 +48,7 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-            
+
                 <!-- First Blog Post -->
              <div id="posts">
             {% for object in latest_posts %}
@@ -131,7 +131,7 @@
     <script>
         $(document).ready(function () {
             var win = $(window);
-            var nextpage = "http://127.0.0.1:8000/api/?format=json";
+            var nextpage = "http://127.0.0.1:8000/api/?page=4";
 
             // Each time the user scrolls
             win.scroll(function () {
@@ -153,17 +153,14 @@
                             {#                     $('#loading').hide();#}
 
 
-                            var post = '';
-
+                            var post = '<br>';
 
                             for (count = 0; count < 3; count++) {
                                 post += '<h2><a href="/';
                                 post += html.results[count].slug;
                                 post += '">';
                                 post += html.results[count].title;
-                                post += '</a></h2><p class="lead">by <a href="#">';
-                                post += html.results[count].writer;
-                                post += '</a></p><p><span class="glyphicon glyphicon-time"></span> Posted on';
+                                post += '</a></h2><p><span class="glyphicon glyphicon-time"></span> Posted on';
                                 post += html.results[count].timestamp;
                                 post += '</p>';
                                 post += html.results[count].content;
@@ -179,9 +176,6 @@
                         }
                     });
 
-
-                    {#                    $('#posts').append(randomPost());#}
-                    {#                    $('#loading').hide();#}
                 }
             });
         });
