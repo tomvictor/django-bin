@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from mainapp.api.views import (MsgListAPIView,
+from MainApp.api.views import (MsgListAPIView,
                               MsgDetailView,
                               MsgUpdateView,
                               MsgDeleteView,
