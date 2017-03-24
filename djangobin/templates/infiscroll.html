@@ -48,24 +48,30 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-
-
-
-
-
+            
                 <!-- First Blog Post -->
-                <h2>
-                    <a href="#">some title</a>
-                </h2>
-                <p class="lead">
-                    by <a href="#">tom</a>
+             <div id="posts">
+            {% for object in latest_posts %}
+                    <h2>
+                        <a href="{% url 'MainApp:detail' object.slug %}"> {{ object.title|title }} </a>
+                    </h2>
+
+                    <p><span class="glyphicon glyphicon-time"></span> {{ object.timestamp|timesince }}</p>
+
+                {{ object.content|safe|escape }}
+
+                    <hr>
+
+                    {% endfor %}
+
+                </div>
+
+                <center>
+                    <p id="loading">
+                    <img src="{% static "Loading_icon.gif" %}" alt="Loading…"/>
                 </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on some date</p>
+                </center>
 
-
-                <p>some content</p>
-                <a class="btn btn-primary" href="#">Read More <span
-                        class="glyphicon glyphicon-chevron-right"></span></a>
 
 
                 {#            {% for post in custom_objects %}#}
@@ -104,56 +110,6 @@
                 {#                </ul>#}
 
 
-                <ul id="posts">
-                    <li>
-                        <article>
-                            <header>
-                                <h1>This Is an Article</h1>
-                            </header>
-
-
-                            <p>Donec hendrerit dolor id auctor ullamcorper. Curabitur ut mauris dolor. Quisque vitae
-                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
-                                dictum fermentum at eget ait dolor id auctor ullamcorper. Curabitur ut mauris dolor.
-                                Quisque vitae
-                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
-                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
-                                Phasellus augue risus, porttiit dolor id auctor ullamcorper. Curabitur ut mauris dolor.
-                                Quisque vitae
-                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
-                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
-                                Phasellus augue risus, porttiit dolor id auctor ullamcorper. Curabitur ut mauris dolor.
-                                Quisque vitae
-                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
-                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
-                                Phasellus augue risus, porttiit dolor id auctor ullamcorper. Curabitur ut mauris dolor.
-                                Quisque vitae
-                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
-                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
-                                Phasellus augue risus, porttiit dolor id auctor ullamcorper. Curabitur ut mauris dolor.
-                                Quisque vitae
-                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
-                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
-                                Phasellus augue risus, porttiit dolor id auctor ullamcorper. Curabitur ut mauris dolor.
-                                Quisque vitae
-                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
-                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
-                                Phasellus augue risus, porttiit dolor id auctor ullamcorper. Curabitur ut mauris dolor.
-                                Quisque vitae
-                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
-                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
-                                Phasellus augue risus, porttircu. Vestibulum eget blandit urna. In eu tristique augue.
-                                Phasellus augue risus, porttitor vel arcu nec, tincidunt laoreet tellus. Nam ornare leo
-                                dapibus ipsum dictum interdum.</p>
-                        </article>
-                    </li>
-                </ul>
-
-                <p id="loading">
-                    <img src="{% static "favicon.ico" %}" alt="Loading…"/>
-                </p>
-
-
                 <footer>
                     <p> Created by <a href="http://github.com/tomvictor" target="_blank">Tom Victor</a>.</p>
                 </footer>
@@ -175,6 +131,7 @@
     <script>
         $(document).ready(function () {
             var win = $(window);
+            var nextpage = "http://127.0.0.1:8000/api/?format=json";
 
             // Each time the user scrolls
             win.scroll(function () {
@@ -185,28 +142,38 @@
                     // Uncomment this AJAX call to test it
 
                     $.ajax({
-                        url: 'http://127.0.0.1:8000/api/?format=json',
+                        url: nextpage,
                         dataType: 'json',
                         success: function (html) {
                             console.log("insucces function");
                             console.log(html);
-                            console.log(html.next);
+                            nextpage = html.next;
                             console.log(html.results);
-                            $('#posts').append(html);
+                            {#                            $('#posts').append(html);#}
                             {#                     $('#loading').hide();#}
 
 
-                            var post = '<li>';
-                            post += '<article>';
-                            post += '<header><h1>';
-                            post += html.results[0].title;
-                            post +=  ' </h1></header>';
-                            post +=  html.results[0].content;
-                            post += '</article>';
-                            post += '</li>';
-                             $('#posts').append(post);
+                            var post = '';
 
-                             $('#loading').hide();
+
+                            for (count = 0; count < 3; count++) {
+                                post += '<h2><a href="/';
+                                post += html.results[count].slug;
+                                post += '">';
+                                post += html.results[count].title;
+                                post += '</a></h2><p class="lead">by <a href="#">';
+                                post += html.results[count].writer;
+                                post += '</a></p><p><span class="glyphicon glyphicon-time"></span> Posted on';
+                                post += html.results[count].timestamp;
+                                post += '</p>';
+                                post += html.results[count].content;
+                                post += '<hr>';
+                            }
+
+
+                            $('#posts').append(post);
+
+                            $('#loading').hide();
 
 
                         }
@@ -218,40 +185,6 @@
                 }
             });
         });
-
-
-        // Generate a random post
-        function randomPost() {
-            // Paragraphs that will appear in the post
-            var paragraphs = [
-                '<p>Lorem ipsum dolor sit amet, consectetur ' +
-                'adipiscing elit. Cras vitae suscipit arcu. Praesent pretium orci neque, non ' +
-                'egestas massa suscipit non. In urna ligula, pretium ac magna in, consectetur ' +
-                'venenatis dui. Etiam id commodo neque, vel semper nunc. Vivamus porttitor ' +
-                'condimentum pulvinar. Quisque et consequat mi. Suspendisse luctus, quam in ' +
-                'dapibus venenatis, velit erat malesuada lacus, dapibus tincidunt neque ex vitae ' +
-                'leo. Suspendisse fermentum sit amet urna eu dignissim. Curabitur vel nibh quis ' +
-                'justo volutpat porttitor et tempus sem.</p>',
-            ];
-
-            // Shuffle the paragraphs
-            for (var i = paragraphs.length - 1; !!i; --i) {
-                var j = Math.floor(Math.random() * i);
-                var p = paragraphs[i];
-                paragraphs[i] = paragraphs[j];
-                paragraphs[j] = p;
-            }
-
-            // Generate the post
-            var post = '<li>';
-            post += '<article>';
-            post += '<header><h1>Random Article!</h1></header>';
-            post += paragraphs.join('');
-            post += '</article>';
-            post += '</li>';
-
-            return post;
-        }
 
 
     </script>
