@@ -1,10 +1,12 @@
-from django.conf.urls import url
+from django.conf.urls import url,include
 from MainApp import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-#forms
+    #APis
+    url(r'^api/', include('MainApp.api.urls', namespace='restapi')),
+    #forms
     url(r'^loginform/$',views.login_form,name='login-form-handler'),
     url(r'^signupform/$',views.signup_form,name='signup-form-handler'),
     url(r'^postformhandle/$',views.post_form_upload,name='post-form'),
