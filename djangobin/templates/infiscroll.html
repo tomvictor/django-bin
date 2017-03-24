@@ -1,0 +1,262 @@
+{% extends 'base.html' %}
+{% load  staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block extrahead %}
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/jumbotron.css' %}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <link href="{% static 'datatable/dataTables.bootstrap.min.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    {#                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>#}
+
+                    {% for object in latest_posts %}
+                        <li><a href=" {% url 'MainApp:detail' object.slug %} ">{{ object.title|title }}
+                            ({{ object.timestamp|timesince }} before)</a></li>
+                    {% endfor %}
+
+                    <li><a href="/all/">View All</a></li>
+                </ul>
+
+
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+                <h1 class="page-header">
+                    Paste Way
+                    <small>an ultra minimal <kbd>ctl+v</kbd></small>
+                </h1>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-info alert-dismissible" id="faded" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <strong>{{ message }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+
+
+
+
+                <!-- First Blog Post -->
+                <h2>
+                    <a href="#">some title</a>
+                </h2>
+                <p class="lead">
+                    by <a href="#">tom</a>
+                </p>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on some date</p>
+
+
+                <p>some content</p>
+                <a class="btn btn-primary" href="#">Read More <span
+                        class="glyphicon glyphicon-chevron-right"></span></a>
+
+
+                {#            {% for post in custom_objects %}#}
+                {#              <!-- First Blog Post -->#}
+                {#                <h2>#}
+                {#                    <a href="#">{{ post.title|capfirst }}</a>#}
+                {#                </h2>#}
+                {#                <p class="lead">#}
+                {#                    by <a href="#">{{ post.writer.first_name }}</a>#}
+                {#                </p>#}
+                {#                <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.timestamp }}</p>#}
+                {#                <hr>#}
+                {#                {% if  post.image %}#}
+                {#                    <img class="img-responsive" src="{{ post.image.url }}" alt="">#}
+                {#                  <hr>#}
+                {#                {% endif %}#}
+                {##}
+                {#                <p>{{ post.content|safe|escape }}</p>#}
+                {#                <a class="btn btn-primary" href="#">Read More <span#}
+                {#                        class="glyphicon glyphicon-chevron-right"></span></a>#}
+                {##}
+                {#                <hr>#}
+                {##}
+                {#            {% endfor %}#}
+
+
+                {##}
+                {#                <!-- Pager -->#}
+                {#                <ul class="pager">#}
+                {#                    <li class="previous">#}
+                {#                        <a href="#">&larr; Older</a>#}
+                {#                    </li>#}
+                {#                    <li class="next">#}
+                {#                        <a href="#">Newer &rarr;</a>#}
+                {#                    </li>#}
+                {#                </ul>#}
+
+
+                <ul id="posts">
+                    <li>
+                        <article>
+                            <header>
+                                <h1>This Is an Article</h1>
+                            </header>
+
+
+                            <p>Donec hendrerit dolor id auctor ullamcorper. Curabitur ut mauris dolor. Quisque vitae
+                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
+                                dictum fermentum at eget ait dolor id auctor ullamcorper. Curabitur ut mauris dolor.
+                                Quisque vitae
+                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
+                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
+                                Phasellus augue risus, porttiit dolor id auctor ullamcorper. Curabitur ut mauris dolor.
+                                Quisque vitae
+                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
+                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
+                                Phasellus augue risus, porttiit dolor id auctor ullamcorper. Curabitur ut mauris dolor.
+                                Quisque vitae
+                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
+                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
+                                Phasellus augue risus, porttiit dolor id auctor ullamcorper. Curabitur ut mauris dolor.
+                                Quisque vitae
+                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
+                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
+                                Phasellus augue risus, porttiit dolor id auctor ullamcorper. Curabitur ut mauris dolor.
+                                Quisque vitae
+                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
+                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
+                                Phasellus augue risus, porttiit dolor id auctor ullamcorper. Curabitur ut mauris dolor.
+                                Quisque vitae
+                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
+                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
+                                Phasellus augue risus, porttiit dolor id auctor ullamcorper. Curabitur ut mauris dolor.
+                                Quisque vitae
+                                cursus eros, ac rutrum sem. Aenean in turpis turpis. Fusce sit amet libero id massa
+                                dictum fermentum at eget arcu. Vestibulum eget blandit urna. In eu tristique augue.
+                                Phasellus augue risus, porttircu. Vestibulum eget blandit urna. In eu tristique augue.
+                                Phasellus augue risus, porttitor vel arcu nec, tincidunt laoreet tellus. Nam ornare leo
+                                dapibus ipsum dictum interdum.</p>
+                        </article>
+                    </li>
+                </ul>
+
+                <p id="loading">
+                    <img src="{% static "favicon.ico" %}" alt="Loading…"/>
+                </p>
+
+
+                <footer>
+                    <p> Created by <a href="http://github.com/tomvictor" target="_blank">Tom Victor</a>.</p>
+                </footer>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+{% endblock %}
+
+{% block extrascripts %}
+
+
+
+    <!-- javascript -->
+    <script>
+        $(document).ready(function () {
+            var win = $(window);
+
+            // Each time the user scrolls
+            win.scroll(function () {
+                // End of the document reached?
+                if ($(document).height() - win.height() == win.scrollTop()) {
+                    $('#loading').show();
+
+                    // Uncomment this AJAX call to test it
+
+                    $.ajax({
+                        url: 'http://127.0.0.1:8000/api/?format=json',
+                        dataType: 'json',
+                        success: function (html) {
+                            console.log("insucces function");
+                            console.log(html);
+                            console.log(html.next);
+                            console.log(html.results);
+                            $('#posts').append(html);
+                            {#                     $('#loading').hide();#}
+
+
+                            var post = '<li>';
+                            post += '<article>';
+                            post += '<header><h1>';
+                            post += html.next;
+                            post +=  ' tom</h1></header>';
+                            post += '</article>';
+                            post += '</li>';
+                             $('#posts').append(post);
+
+                             $('#loading').hide();
+
+
+                        }
+                    });
+
+
+                    {#                    $('#posts').append(randomPost());#}
+                    {#                    $('#loading').hide();#}
+                }
+            });
+        });
+
+
+        // Generate a random post
+        function randomPost() {
+            // Paragraphs that will appear in the post
+            var paragraphs = [
+                '<p>Lorem ipsum dolor sit amet, consectetur ' +
+                'adipiscing elit. Cras vitae suscipit arcu. Praesent pretium orci neque, non ' +
+                'egestas massa suscipit non. In urna ligula, pretium ac magna in, consectetur ' +
+                'venenatis dui. Etiam id commodo neque, vel semper nunc. Vivamus porttitor ' +
+                'condimentum pulvinar. Quisque et consequat mi. Suspendisse luctus, quam in ' +
+                'dapibus venenatis, velit erat malesuada lacus, dapibus tincidunt neque ex vitae ' +
+                'leo. Suspendisse fermentum sit amet urna eu dignissim. Curabitur vel nibh quis ' +
+                'justo volutpat porttitor et tempus sem.</p>',
+            ];
+
+            // Shuffle the paragraphs
+            for (var i = paragraphs.length - 1; !!i; --i) {
+                var j = Math.floor(Math.random() * i);
+                var p = paragraphs[i];
+                paragraphs[i] = paragraphs[j];
+                paragraphs[j] = p;
+            }
+
+            // Generate the post
+            var post = '<li>';
+            post += '<article>';
+            post += '<header><h1>Random Article!</h1></header>';
+            post += paragraphs.join('');
+            post += '</article>';
+            post += '</li>';
+
+            return post;
+        }
+
+
+    </script>
+
+
+{% endblock %}
+
+
+
