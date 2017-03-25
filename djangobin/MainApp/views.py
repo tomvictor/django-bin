@@ -45,7 +45,7 @@ class base_view(ListView):
 
         # print(current_user)
         context['form'] = NewPost(initial={'writer': context_user,'timestamp':datetime.now()})
-        context['latest_posts'] = Post.objects.all().filter(status="public").order_by("-timestamp")[:18]
+        context['latest_posts'] = Post.objects.all().filter(status="public").order_by("-timestamp")[:9]
         return context
 
 # @login_required
