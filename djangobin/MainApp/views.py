@@ -36,6 +36,9 @@ class base_view(ListView):
 
     def get_queryset(self, *args,**kwargs):
         qs = super(base_view,self).get_queryset(*args, **kwargs).order_by("id")
+        print(qs)
+        print(qs.first().id)
+        return qs
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
