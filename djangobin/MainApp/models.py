@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.admin import User
+from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from django.db.models.signals import pre_save
@@ -40,9 +41,10 @@ class Post(models.Model):
     #     ordering = ('timestamp')
 
     def get_absolute_url(self):
-        if settings.DEBUG:
-            return "http://pasteway.com/%s" % (self.slug)
-        return "http://pasteway.com/%s" % (self.slug)
+        return reverse("MainApp:detail",kwargs={"slug":self.slug})
+        # if settings.DEBUG:
+        #     return "http://pasteway.com/%s" % (self.slug)
+        # return "http://pasteway.com/%s" % (self.slug)
 
 
 def create_slug(instance, new_slug=None):

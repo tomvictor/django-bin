@@ -28,10 +28,14 @@ class all_posts(ListView):
     context_object_name = 'all_posts'
 
 class base_view(ListView):
-    queryset = Post.objects.all().filter(status="public")
+    # queryset = Post.objects.all().filter(status="public")
     # print(queryset)
     # template_name = 'home.html'
+    model = Post
     context_object_name = 'all_posts'
+
+    def get_queryset(self, *args,**kwargs):
+        qs = super(base_view,self).get_queryset(*args, **kwargs).order_by("id")
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
