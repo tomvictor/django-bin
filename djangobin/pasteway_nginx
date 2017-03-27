@@ -1,0 +1,21 @@
+server {
+    listen 80;
+    server_name pastey.com www.pasteway.com ;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/technorip/www/pasteway;
+    }
+
+    location /media/ {
+        root /home/technorip/www/pasteway;
+    }
+    location /downloads/ {
+        root /home/technorip/www/pasteway;
+    }
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/technorip/www/pasteway/pasteway.sock;
+    }
+}
+
