@@ -1,0 +1,45 @@
+server {
+    listen 80;
+    server_name pasteway.com ;
+
+	return 301 https://pasteway.com$request_uri;
+}
+
+
+server {
+    server_name pasteway.com ;
+
+    listen 443; 
+    ssl on;  
+    ssl_certificate /etc/ssl/pasteway_cert_chain.crt;  
+    ssl_certificate_key /etc/ssl/server.key; 
+
+    client_max_body_size 4G;
+
+
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/technorip/www/pasteway;
+    }
+
+    location /media/ {
+        root /home/technorip/www/pasteway;
+    }
+    location /downloads/ {
+        root /home/technorip/www/pasteway;
+    }
+    
+
+    location / {
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;  
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+
+        if (!-f $request_filename) {
+            proxy_pass http://unix:/home/technorip/www/pasteway/pasteway.sock;
+            break;
+        }
+    }
+}
