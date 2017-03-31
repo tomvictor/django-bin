@@ -1,0 +1,15 @@
+[Unit]
+Description=pasteway daemon
+After=network.target
+
+[Service]
+User=technorip
+Group=www-data
+
+WorkingDirectory=/home/technorip/www/pasteway
+ExecStart=/home/technorip/www/pasteway/myenv/bin/gunicorn --workers 3 --bind unix:/home/technorip/www/pasteway/pasteway.sock djangobin.wsgi:application
+
+
+[Install]
+WantedBy=multi-user.target
+
